@@ -1,28 +1,23 @@
 # 公众号排版 · WeChat Layout
 
 一个 DeepSeek Harness（DSH）客户端插件：在右侧文件面板选择 **doocs/md 排版**，
-把 Markdown 渲染成可直接粘贴进微信公众号编辑器的富文本；聊天回复也能一键转成
-公众号文章。样式参考 [doocs/md](https://github.com/doocs/md)。
+把 Markdown 渲染成可直接粘贴进微信公众号编辑器的富文本。样式参考
+[doocs/md](https://github.com/doocs/md)。
 
 A DSH client plugin that turns Markdown into WeChat official-account (公众号)
 ready HTML, modelled on [doocs/md](https://github.com/doocs/md).
 
-- Each finalized assistant reply gets a **公众号排版** icon in its action row. It
-  opens the converter pre-filled with that reply's Markdown.
 - In the right Sidebar, opening a `.md` / `.markdown` file keeps the shipped
   **Markdown** viewer by default. The viewer dropdown gains a **doocs/md 排版**
   option; selecting it renders the file as a WeChat article with theme controls
   and a copy-icon button. The shipped **Plain text** viewer stays available too.
-- The converter has a Markdown editor, a live WeChat-style preview, three
-  doocs/md themes (经典 / 优雅 / 简洁), five accent colours, and 14–18px body
-  sizes. Preferences persist per browser.
-- **复制到公众号** writes the rendered article to the clipboard as rich HTML
+- The viewer has three doocs/md themes (经典 / 优雅 / 简洁), five accent
+  colours, and 14–18px body sizes. Preferences persist per browser.
+- The copy-icon button writes the rendered article to the clipboard as rich HTML
   (`text/html` + `text/plain`); paste it into the WeChat editor and the inline
-  styles survive. **复制 HTML** copies the same markup as source.
+  styles survive.
 - A leading YAML frontmatter block is treated as document metadata and omitted
   from the article; the rest of the file renders normally.
-- **导入 .md** loads a local Markdown file into the editor, so a draft written
-  elsewhere can be converted without touching a chat message.
 
 ## Why it can be pasted into WeChat
 
@@ -63,8 +58,7 @@ node --check client.js  # syntax check
 ```
 
 - `src/markdown.js` — theme style maps and the marked renderer (pure, no React).
-- `src/ui.js` — slot registrations, the message action, the dialog, and the
-  right-Sidebar file viewer.
+- `src/ui.js` — the right-Sidebar document viewer and its registration.
 - `src/marked.min.js` — vendored marked build; do not edit.
 
 ## Known limits
@@ -79,6 +73,7 @@ node --check client.js  # syntax check
 - The preview is the clipboard payload, not an iframe of the WeChat editor, so
   WeChat-side quirks (e.g. table scrolling on small screens) cannot be
   previewed exactly.
+- The plugin is a viewer only; it does not edit files or add a chat entry.
 
 Themes are adapted from doocs/md's WTFPL-licensed theme styles; the
 WeChat-layout UI is written for DSH. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)
